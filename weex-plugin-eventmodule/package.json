@@ -1,0 +1,31 @@
+{
+  "name": "weex-plugin-eventmodule",
+  "version": "1.0.0",
+  "description": "weex event module",
+  "cordova": {
+    "id": "weex-plugin-eventmodule",
+    "platforms": [
+      "android",
+      "ios",
+      "browser"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weexteam/weex-plugins"
+  },
+  "keywords": [
+    "weex",
+    "event",
+    "weex-android",
+    "weex-ios",
+    "cordova-browser"
+  ],
+  "scripts": {
+    
+  },
+  "author": "weexteam",
+  "license": "Apache-2.0",
+  "devDependencies": {
+  }
+}

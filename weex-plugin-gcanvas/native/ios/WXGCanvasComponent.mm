@@ -1,0 +1,148 @@
+//
+//  WXGCanvasComponent.m
+//  Pods
+//
+//  Created by 兵长 on 16/8/16.
+//
+//
+
+#import "WXGCanvasComponent.h"
+#import <GLKit/GLKit.h>
+#import <GCanvas/GCVCommon.h>
+
+
+@interface WXGCanvasComponent()/**<GLKViewDelegate>*/{
+    GLuint _vertexBuffer;
+    GLuint _indexBuffer;
+    GLuint _vertexArray;
+    GLuint _vertexProgram;
+    GLuint _uniformModelViewProjectionMatrix;
+    GLuint _uniformNormalMatrix;
+    GLuint _fragmentProgram;
+    GLuint _ppo;
+    GLfloat _positions[2000];
+    GLuint _indexs[2000];
+}
+
+//@property (nonatomic, strong) NSMutableArray *drawActionList;
+//@property (nonatomic, strong) GLKBaseEffect *effect;
+//@property (nonatomic, strong) NSMutableDictionary *cacheMap;
+//@property (nonatomic, strong) CADisplayLink *displayLink;
+//@property (nonatomic, assign) NSInteger fps;
+
+
+//@property(nonatomic, assign) GCanvasCore* gcanvas;
+
+//@property(nonatomic, strong) UILabel* label;
+//@property(nonatomic, strong) GLKView* glView;
+//@property(nonatomic, strong) NSMutableArray* renderCommandArray;
+//@property(nonatomic, strong) NSMutableDictionary* preLoadImageDict;
+//@property(nonatomic, strong) EAGLContext* glContext;
+//@property(nonatomic, strong) CADisplayLink* display;
+@property(nonatomic, assign) CGRect frame;
+@end
+
+
+
+@implementation WXGCanvasComponent
+
+
+/**
+ *  @abstract Initializes a new component using the specified  properties.
+ *
+ *  @param ref          the identity string of component
+ *  @param type         component type
+ *  @param styles       component's styles
+ *  @param attributes   component's attributes
+ *  @param events       component's events
+ *  @param weexInstance the weexInstance with which the component associated
+ *
+ *  @return A WXComponent instance.
+ */
+- (instancetype)initWithRef:(NSString *)ref
+                       type:(NSString*)type
+                     styles:(nullable NSDictionary *)styles
+                 attributes:(nullable NSDictionary *)attributes
+                     events:(nullable NSArray *)events
+               weexInstance:(WXSDKInstance *)weexInstance{
+    GCVLOG_METHOD(@"ref=%@, type=%@, styles=%@, attributes=%@, events=%@, weexInstance=%@", ref, type, styles, attributes, events, weexInstance)
+    
+    if (self = [super initWithRef:ref type:type styles:styles attributes:attributes events:events weexInstance:weexInstance]) {
+        CGPoint origin = [[UIScreen mainScreen] bounds].origin;
+        CGSize size = [[UIScreen mainScreen] bounds].size;
+        if (styles[@"left"]){
+            origin.x = [styles[@"left"] floatValue];
+        }
+        if (styles[@"top"]){
+            origin.y = [styles[@"top"] floatValue];
+        }
+        if (styles[@"width"]){
+            size.width = [styles[@"width"] floatValue];
+        }
+        if (styles[@"height"]){
+            size.height = [styles[@"height"] floatValue];
+        }
+        self.frame = CGRectMake(origin.x, origin.y, size.width, size.height);
+        
+        
+        GLKView *glkview = [[GLKView alloc] initWithFrame:self.frame];
+        glkview.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        [EAGLContext setCurrentContext:glkview.context];
+//    glkview.delegate = self;
+        glkview.enableSetNeedsDisplay = NO;
+        glkview.userInteractionEnabled = NO;
+        glkview.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+        glkview.backgroundColor = [UIColor yellowColor];
+        glkview.layer.borderColor = [UIColor blueColor].CGColor;
+        glkview.layer.borderWidth = 0.5f;
+        self.glkview = glkview;
+        self.componetFrame = self.frame;
+        
+        
+        GCVLOG_METHOD(@"frame=(%.2f, %.2f) * (%.2f, %.2f)", self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+        
+        GCVLOG_METHOD(@"1");
+        
+        GCVLOG_METHOD(@"2");
+    }
+    return self;
+}
+
+
+- (UIView *)loadView
+{
+//    [self.glkview display];
+    return self.glkview;
+}
+
+
+//- (void)render:(NSDictionary *)params {
+//    GCVLOG_METHOD(@"params=%@", params);
+//    
+////    NSArray* commands = params[@"commands"];
+////    [self.renderCommandArray addObject:commands[0]];
+//    
+//    [self.gcanvasPlugin addCommands:params];
+//    
+//    [self.glkview display];
+//}
+//
+
+//
+//#pragma mark - GLKViewDelegate
+//- (void)glkView:(GLKView*)view drawInRect:(CGRect)rect {
+//    GCVLOG_METHOD(@"rect=(%.2f, %.2f) * (%.2f, %.2f)", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+//
+//    if(!self.glkview.context){
+//        return;
+//    }
+//    [EAGLContext setCurrentContext:self.glkview.context];
+//    
+//    
+//    glClearColor(0, 0, 1, 0.5);
+//    glClear(GL_COLOR_BUFFER_BIT);
+//    
+//    [self.gcanvasPlugin execCommands];
+//}
+
+@end

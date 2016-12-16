@@ -1,0 +1,19 @@
+{
+  "name": "G-Canvas_weex_plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./core/gcavas.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --watch",
+    "serve": "serve -p 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    
+    "g2-mobile":"^2.1.6"
+  }
+}

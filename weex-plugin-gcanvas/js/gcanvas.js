@@ -1,3 +1,27 @@
+/**
+
+gcanvas.js使用说明:
+1、引入gcanvas库
+2、调用gcanvas库的createElement(component)接口，创建一个canvas对象。
+3、调用canvas对象的getContext(param)，获取用于渲染的context。
+
+扩展用法：
+1、对于Android环境，部分机型可能无法运行。建议在页面入口处调用gcanvas库的start(successCallback, errorCallback)函数，进行黑白名单判断。
+2、默认每16ms，会自动下发一次渲染指令。某些特殊场景下，希望自行控制下发频率的，可直接调用context.render()接口。调用后会关闭自动下发的操作，切换成每次主动调用render时才下发。
+
+完整示例如下：
+var libGCanvas = require('../../core/gcanvas');
+libGCanvas.start(function(){
+    nativeLog('gcanvas.start success');
+    var canvasObj = libGCanvas.createElement(gcanvasComponent);
+    var context = canvasObj.getContext('2d');
+    //do any action here
+},function(){
+    nativeLog('gcanvas.start failed');
+}); 
+
+*/
+
 var GBridge = require("./gutil").GBridge;
 var GLog = require("./gutil").GLog;
 //var GContextWebGL = require('./gwebgl');
@@ -86,10 +110,20 @@ var GCanvas = {
         GBridge.callEnable(ref,config,function(e){
 
         });
+
         //get device
         GBridge.getDeviceInfo(function(e){//这里是异步操作
 
-          GCanvasPlatform = 2;
+
+
+          if (e.data && e.data.platform == "iOS"){
+              GCanvasPlatform = 1;
+
+          }else{
+            GCanvasPlatform = 2;
+
+          }
+          console.log('GCanvasPlatform = ' + GCanvasPlatform);
           succ();
           /*
             if(e && e.result === 'success'){
@@ -100,7 +134,6 @@ var GCanvas = {
                     var info = JSON.parse(e.data);
                     if(info.GCANVASLIBENABLE && info.IS_AVAILABLE){
                         GDeviceInfo = info;
-                        //检查
                         GSupport.checkList(succ,fail);
                     }else{
                         fail&&fail();
@@ -111,32 +144,37 @@ var GCanvas = {
             }
             */
         });
-
     },
-    getContext: function (contextID) {
 
+    getContext: function (contextID) {
         if (_context){
             return _context;//unsupport change type after create
         }
 
-         if (contextID.match(/webgl/i)){
-            if (!_context) {
-                _context = new GContextWebGL();
-            }
+        if (contextID.match(/webgl/i)){
+            _context = new GContextWebGL();
             _context_type = 1;
         }else{
             _context = new GContext2D();
             _context_type = 0;
         }
 
-
-        //GCanvas._toNative(null, null, 'GCanvas', 'setContextType', [this._context_type]);
         GBridge.setContextType(_context_type);
+
+        if (!_context.timer) {
+            _context.timer = setInterval(this.render.bind(this), 16);            
+        }
+        
         return _context;
+    },
+    render: function(){
+        // GLog.d('[GCanvas::render] start...');
+        _context.render("auto");
     },
 
     disable: function(){
         GBridge.callDisable();
     }
 };
+
 module.exports = GCanvas;

@@ -20,14 +20,14 @@ function GContext2D() {
     this._getImageData = new Array();
 
 //    GCanvas._forbiddenAutoReplaceCanvas =true;
-    this._apiCanvas  = document.createElement('canvas');
+//    this._apiCanvas  = document.createElement('canvas');
 //    GCanvas._forbiddenAutoReplaceCanvas =false;
-    console.log("apicanvas="+this._apiCanvas);
-
-    //this._apiContext = this._apiCanvas.getContext("2d");
-    //this._apiContext.font = this._font;
+//    console.error("apicanvas="+this._apiCanvas);
+//    this._apiContext = this._apiCanvas.getContext("2d");
+//    this._apiContext.font = this._font;
 
     this._savedGlobalAlpha =[];
+    this.timer =null;
 }
 
 
@@ -454,19 +454,18 @@ Object.defineProperty(GContext2D.prototype, "font", {
  *          "images/spritesheet.jpg"; // calls loadTexture for you
  * @private
  */
-GContext2D.prototype.loadTexture = function(image, successCallback,
-        errorCallback) {
-    if (successCallback && typeof successCallback !== 'function') {
-        throw new Error(
-                'GContext2D.loadTexture failure: successCallback parameter not a function');
-    }
-    if (errorCallback && typeof errorCallback !== 'function') {
-        throw new Error(
-                'GContext2D.loadTexture failure: errorCallback parameter not a function');
-    }
+GContext2D.prototype.loadTexture = function(image, successCallback, errorCallback) {
+    // if (successCallback && typeof successCallback !== 'function') {
+    //     throw new Error(
+    //             'GContext2D.loadTexture failure: successCallback parameter not a function');
+    // }
+    // if (errorCallback && typeof errorCallback !== 'function') {
+    //     throw new Error(
+    //             'GContext2D.loadTexture failure: errorCallback parameter not a function');
+    // }
 
-    GCanvas._toNative(successCallback, errorCallback, 'GCanvas',
-            'loadTexture', [ image.src, image._id ]);
+    // GCanvas._toNative(successCallback, errorCallback, 'GCanvas',
+    //         'loadTexture', [ image.src, image._id ]);
 };
 
 /**
@@ -483,8 +482,8 @@ GContext2D.prototype.loadTexture = function(image, successCallback,
  * @private
  */
 GContext2D.prototype.unloadTexture = function(image) {
-    GCanvas._toNative(null, null, 'GCanvas', 'unloadTexture',
-            [ image._id ]);
+    // GCanvas._toNative(null, null, 'GCanvas', 'unloadTexture',
+    //         [ image._id ]);
 };
 
 /**
@@ -626,18 +625,18 @@ dx, dy, dw, dh) { // destination
 
     console.error("[GContext2D.drawImage] start...");
 
-    this.render();
+    this.render("auto");
 
     GBridge.preLoadImage(image);
 
     var numArgs = arguments.length;
 
 
-    this._drawCommands += ("d" + numArgs + "," + image + ","
-            + sx + "," + sy + "," + sw + "," + sh + ","
+    this._drawCommands += ("d" + numArgs + "," + image + "," 
+            + sx + "," + sy + "," + sw + "," + sh + "," 
             + dx + "," + dy + "," + dw + "," + dh + ";");
 
-    this.render();
+    this.render("auto");
     return;
     if (numArgs == 3) {
 
@@ -681,12 +680,15 @@ dx, dy, dw, dh) { // destination
  * GCanvas.render(); // calls GContext2D.render()
  */
 
-GContext2D.prototype.render = function() {
+GContext2D.prototype.render = function(flag) {
+    if (typeof flag === "undefined"){
+        clearInterval(this.timer);
+        this.timer = null;
+    }
     var commands = this._drawCommands;
     this._drawCommands = "";
     GLog.d("GContext2D#render() called, commands is "+ commands);
     if (commands != null && commands != "") {
-        //GCanvas._toNative(null, null, 'GCanvas', 'render', [ commands ]);
         GBridge.callRender(commands)
     }
 };
@@ -696,17 +698,16 @@ GContext2D.prototype.render = function() {
  *
  * @private
  */
-GContext2D.prototype.capture = function(x, y, w, h, fileName,
-        successCallback, errorCallback) {
-    if (successCallback && typeof successCallback !== 'function') {
-        throw new Error('successCallback parameter not a function');
-    }
-    if (errorCallback && typeof errorCallback !== 'function') {
-        throw new Error('errorCallback parameter not a function');
-    }
+GContext2D.prototype.capture = function(x, y, w, h, fileName, successCallback, errorCallback) {
+    // if (successCallback && typeof successCallback !== 'function') {
+    //     throw new Error('successCallback parameter not a function');
+    // }
+    // if (errorCallback && typeof errorCallback !== 'function') {
+    //     throw new Error('errorCallback parameter not a function');
+    // }
 
-    GCanvas._toNative(successCallback, errorCallback, 'GCanvas',
-            'capture', [ x, y, w, h, fileName ]);
+    // GCanvas._toNative(successCallback, errorCallback, 'GCanvas',
+    //         'capture', [ x, y, w, h, fileName ]);
 };
 
 
@@ -899,8 +900,10 @@ GContext2D.prototype.strokeText = function(text, x, y) {
 };
 
 
+//TODO:这个api有用需要原生的canvas对象，所以不支持
 GContext2D.prototype.measureText = function(text) {
-    return this._apiContext.measureText(text);
+    return -1;
+    //return this._apiContext.measureText(text);
 };
 
 GContext2D.prototype.isPointInPath = function(x,y) {
@@ -1014,51 +1017,52 @@ GContext2D.prototype.putImageData = function(imgData, x, y, dirtyX, dirtyY, dirt
 
 
 GContext2D.prototype.getImageDataAsyn = function(x, y, w, h) {
-    GLog.d("GContext2D::getImageDataAsyn xy=(" + x + "," + y + "), wh=(" + w + ","+ h +")");
-    GCanvas._instance.getContext().render();
-    var len = w*h;
-    var imgData = new GImageData(w,h);
-    imgData._x = x;
-    imgData._y = y;
-    imgData._dataGet = 0;
-    imgData._split = 0;
-    var me = this;
-    me._getImageData.push(imgData);
+    return '';
+    // GLog.d("GContext2D::getImageDataAsyn xy=(" + x + "," + y + "), wh=(" + w + ","+ h +")");
+    // GCanvas._instance.getContext().render("auto");
+    // var len = w*h;
+    // var imgData = new GImageData(w,h);
+    // imgData._x = x;
+    // imgData._y = y;
+    // imgData._dataGet = 0;
+    // imgData._split = 0;
+    // var me = this;
+    // me._getImageData.push(imgData);
 
-    var h2 = Math.floor(262144/w);// 2^18
-    if (h2 < h)
-        imgData._split = 1;
+    // var h2 = Math.floor(262144/w);// 2^18
+    // if (h2 < h)
+    //     imgData._split = 1;
 
-    function getImageDataAsynSuccess(getData) {
-        var destData = me._getImageData[0];
-        GLog.d("GContext2D::getImageDataAsyn: dataGet=" + destData._dataGet);
-        if (0 == destData._split){// one part
-            destData.data = Gbase64ToArr(getData);
-            destData._dataGet += destData.data.length;
-        }else{// multi parts
-            var taBytes  = Gbase64ToArr(getData);
-            destData._dataGet += taBytes.length;
-            for (var i=0;i<taBytes.length;i++){
-                destData.data[destData._dataGet+i] = taBytes[i];
-            }
-        }
+    // function getImageDataAsynSuccess(getData) {
+    //     var destData = me._getImageData[0];
+    //     GLog.d("GContext2D::getImageDataAsyn: dataGet=" + destData._dataGet);
+    //     if (0 == destData._split){// one part
+    //         destData.data = Gbase64ToArr(getData);
+    //         destData._dataGet += destData.data.length;
+    //     }else{// multi parts
+    //         var taBytes  = Gbase64ToArr(getData);
+    //         destData._dataGet += taBytes.length;
+    //         for (var i=0;i<taBytes.length;i++){
+    //             destData.data[destData._dataGet+i] = taBytes[i];
+    //         }
+    //     }
 
-        if (destData._dataGet >= (destData._x*destData._y)){
-            if (typeof destData.onload === 'function') {
-                GLog.d("GContext2D::getImageDataAsyn: callback exec.");
-                destData.onload();
-            }
-            me._getImageData.splice(0,1);//delete first data
-        }
-    }
+    //     if (destData._dataGet >= (destData._x*destData._y)){
+    //         if (typeof destData.onload === 'function') {
+    //             GLog.d("GContext2D::getImageDataAsyn: callback exec.");
+    //             destData.onload();
+    //         }
+    //         me._getImageData.splice(0,1);//delete first data
+    //     }
+    // }
 
-    for(var i=0; i<h; i+= h2){
-        GCanvas._toNative(getImageDataAsynSuccess, getImageDataAsynSuccess, 'GCanvas',
-                'getImageData', [ x, y+i, w, (i+h2>h)?(h-i):h2 ]);
-    }
+    // for(var i=0; i<h; i+= h2){
+    //     GCanvas._toNative(getImageDataAsynSuccess, getImageDataAsynSuccess, 'GCanvas',
+    //             'getImageData', [ x, y+i, w, (i+h2>h)?(h-i):h2 ]);
+    // }
 
 
-    return imgData;
+    // return imgData;
 };
 
 

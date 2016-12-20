@@ -19,12 +19,12 @@
 -->
 
 <plugin xmlns="http://www.w3.org/ns/widgets"
-    id="G-Canvas_weex_plugin"
-    version="1.0.0">
-    <name>canvas</name>
-    <description>**</description>
+    id="weex-gcanvas"
+    version="0.1.3">
+    <name>weex-gcanvas</name>
+    <description></description>
     <license>Apache 2.0</license>
-    <keywords>weex,event</keywords>
+    <keywords>weex,canvas</keywords>
     <repo>https://*.git</repo>
     <issue>https://*</issue>
 
@@ -63,8 +63,7 @@
          
 
      </platform>
-
-     <!-- android -->
+          <!-- android -->
      <platform name="android">
          
          <config-file target="config.xml" parent="/*">
@@ -95,3 +94,4 @@
 
 
 </plugin>
+

@@ -20,6 +20,7 @@ var GBridge = {
         canvasModule.render({commands: [commands]});
     },
 
+    /**预加载图片*/
     preLoadImage: function (commands) {
         if (!inWeex) {
             return;
@@ -34,7 +35,7 @@ var GBridge = {
      * @param ref wx-canvas 引用
      * @param configArray 配置参数
      **/
-    callEnable: function (ref,configArray) {
+    callEnable: function (ref, configArray, callback) {
         if (!inWeex) {
             return;
         }
@@ -44,9 +45,7 @@ var GBridge = {
         };
         canvasModule.enable(params, function (e) {
             GLog.d('bridge#callEnable() return val:' + JSON.stringify(e));
-            if (!e || e.result === 'fail') {//failed
-                //TODO
-            }
+            callback && callback(e);
         });
     },
 
@@ -63,7 +62,9 @@ var GBridge = {
         var params = {
             
         };
-        canvasModule.disable(params);
+        canvasModule.disable(params, function(e){
+            GLog.d('bridge#callDisable() return val:' + JSON.stringify(e));
+        });
     },
 
     /**
@@ -87,12 +88,12 @@ var GBridge = {
      * @param context_type 0代表2d,1代表3d
      * */
     setContextType: function (context_type){
-        if(context_type != 1 && context_type != 2){
+        if(context_type != 0 && context_type != 1){
             GLog.d('bridge#setContextType(): invalid context type===>' + context_type);
             return;
         }
         GLog.d('bridge#setContextType(): context type is ' + context_type);
-       canvasModule.setContextType({type:context_type});
+        canvasModule.setContextType({type:context_type});
     }
 };
 

@@ -235,7 +235,7 @@ import static com.taobao.gcanvas.GCanvas.fastCanvas;
 public class GcanvasModule extends WXModule {
 
 
-    static private Object sRef;
+    public static Object sRef;
 
     public static boolean sDebug = false;
 
@@ -254,16 +254,17 @@ public class GcanvasModule extends WXModule {
 
             fastCanvas.onDestroy();
             fastCanvas = null;
+            sRef = null;
         } else {
             GLog.d(TAG, "disable(),  fastCanvas == null");
         }
 
-        HashMap<String, Object> hm = new HashMap<>();
-
-        WXSDKManager.getInstance().callback(mWXSDKInstance.getInstanceId(),
-                callBack,
-                hm
-        );
+//        HashMap<String, Object> hm = new HashMap<>();
+//
+//        WXSDKManager.getInstance().callback(mWXSDKInstance.getInstanceId(),
+//                callBack,
+//                hm
+//        );
 
 
     }
@@ -571,12 +572,12 @@ public class GcanvasModule extends WXModule {
         GLog.i(TAG, "execGcanvas callback: " + callback);
 
 
-        fastCanvas = null;
+        //fastCanvas = null;
 
-//        if (cmd.equals("enable")) {
-//            fastCanvas = null;
-//            GLog.i(TAG, "enable, reset fastCanvas");
-//        }
+        if (cmd.equals("enable")) {
+            fastCanvas = null;
+            GLog.i(TAG, "enable, reset fastCanvas");
+        }
 
         GUtil.preInitActivity = (Activity) mWXSDKInstance.getContext();
         if (GUtil.preInitActivity != null) {
@@ -633,7 +634,7 @@ public class GcanvasModule extends WXModule {
                     JSONArray args14 = GCanvasHelper.argsToJsonArrary("setLogLevel", "[\"debug\"]");
                     fastCanvas.execute("setLogLevel", args14, null);
                 }else{
-                    JSONArray args14 = GCanvasHelper.argsToJsonArrary("setLogLevel", "[\"error\"]");
+                    JSONArray args14 = GCanvasHelper.argsToJsonArrary("setLogLevel", "[\"info\"]");
                     fastCanvas.execute("setLogLevel", args14, null);
                 }
 

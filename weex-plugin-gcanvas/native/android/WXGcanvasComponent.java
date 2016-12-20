@@ -4,12 +4,14 @@ package com.alibaba.weex.extend.component;
 import android.content.Context;
 
 import com.taobao.gcanvas.GCanvas;
+import com.taobao.gcanvas.GLog;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.Component;
 import com.taobao.weex.dom.WXDomObject;
 import com.taobao.weex.ui.ComponentCreator;
 import com.taobao.weex.ui.component.WXComponent;
 import com.taobao.weex.ui.component.WXVContainer;
+import com.taobao.weex.ui.module.GcanvasModule;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -50,14 +52,18 @@ public class WXGcanvasComponent extends WXComponent<WXGCanvasGLSurfaceView> {
     public void onActivityDestroy() {
 
         if (GCanvas.fastCanvas != null) {
+
             GCanvas.fastCanvas.onDestroy();
             GCanvas.fastCanvas = null;
         }
 
+        GcanvasModule.sRef = null;
+        
     }
 
 
 }
+
 
 
 

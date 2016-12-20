@@ -76,15 +76,15 @@
          </config-file>
          
          <config-file target="config.xml" parent="/*">
-             <feature name="WXGcanvas">
+             <feature name="WXGcanvasComponent">
                  <param name="category" value="component" />
-                 <param name="android-package" value="com.alibaba.weex.extend.component.WXGcanvas" />
+                 <param name="android-package" value="com.alibaba.weex.extend.component.WXGcanvasComponent" />
                  <param name="api" value="gcanvas" />
              </feature>
          </config-file>
 
          <source-file src="native/android/WXGCanvasGLSurfaceView.java" target-dir="src/com/alibaba/weex/extend/component" />
-         <source-file src="native/android/WXGcanvas.java" target-dir="src/com/alibaba/weex/extend/component" />
+         <source-file src="native/android/WXGcanvasComponent.java" target-dir="src/com/alibaba/weex/extend/component" />
          <source-file src="native/android/GcanvasModule.java" target-dir="src/com/taobao/weex/ui/module" />
 
          <!--<framework src="com.taobao.android:gcanvas_weex_plugin:1.0.0-SNAPSHOT" />-->

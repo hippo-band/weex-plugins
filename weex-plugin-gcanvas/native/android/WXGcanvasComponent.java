@@ -2,7 +2,6 @@ package com.alibaba.weex.extend.component;
 
 
 import android.content.Context;
-import android.opengl.GLSurfaceView;
 
 import com.taobao.gcanvas.GCanvas;
 import com.taobao.weex.WXSDKInstance;
@@ -17,33 +16,32 @@ import java.lang.reflect.InvocationTargetException;
 
 
 @Component(lazyload = false)
-public class WXGcanvas extends WXComponent<GLSurfaceView> {
-
+public class WXGcanvasComponent extends WXComponent<WXGCanvasGLSurfaceView> {
 
     public static class Creator implements ComponentCreator {
         public WXComponent createInstance(WXSDKInstance instance, WXDomObject node, WXVContainer parent, boolean lazy) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-            return new com.alibaba.weex.extend.component.WXGcanvas(instance, node, parent, lazy);
+            return new WXGcanvasComponent(instance, node, parent, lazy);
         }
     }
 
 
     @Deprecated
-    public WXGcanvas(WXSDKInstance instance, WXDomObject dom, WXVContainer parent, String instanceId, boolean isLazy) {
+    public WXGcanvasComponent(WXSDKInstance instance, WXDomObject dom, WXVContainer parent, String instanceId, boolean isLazy) {
         this(instance, dom, parent, isLazy);
     }
 
-    public WXGcanvas(WXSDKInstance instance, WXDomObject node,
-                     WXVContainer parent, boolean lazy) {
+    public WXGcanvasComponent(WXSDKInstance instance, WXDomObject node,
+                              WXVContainer parent, boolean lazy) {
         super(instance, node, parent, lazy);
     }
 
     @Override
-    protected GLSurfaceView initComponentHostView(Context context) {
-
-
-        WXGCanvasGLSurfaceView view = new WXGCanvasGLSurfaceView(getContext(), null);
+    protected WXGCanvasGLSurfaceView initComponentHostView(Context context) {
 
         registerActivityStateListener();
+
+        WXGCanvasGLSurfaceView view = new WXGCanvasGLSurfaceView(context, null);
+
         return view;
     }
 
@@ -60,7 +58,6 @@ public class WXGcanvas extends WXComponent<GLSurfaceView> {
 
 
 }
-
 
 
 

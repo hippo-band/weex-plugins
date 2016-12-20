@@ -6,9 +6,12 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 
+import com.taobao.gcanvas.GCanvas;
 import com.taobao.gcanvas.GCanvasView;
 import com.taobao.weex.dom.WXDomObject;
+import com.taobao.weex.ui.module.GcanvasModule;
 import com.taobao.weex.ui.view.gesture.WXGesture;
 import com.taobao.weex.ui.view.gesture.WXGestureObservable;
 
@@ -53,5 +56,21 @@ public class WXGCanvasGLSurfaceView extends GCanvasView implements WXGestureObse
 
     }
 
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+        super.surfaceDestroyed(holder);
+
+        //gcanvas
+
+//        if (GcanvasModule.sEnableHotRefreash) {
+//            if (GCanvas.fastCanvas != null) {
+//                GCanvas.fastCanvas.onDestroy();
+//                GCanvas.fastCanvas = null;
+//            }
+//        }
+        //gcanvas
+    }
 
 }

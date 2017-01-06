@@ -94,6 +94,17 @@ var GBridge = {
         }
         GLog.d('bridge#setContextType(): context type is ' + context_type);
         canvasModule.setContextType({type:context_type});
+    },
+
+    /**
+     *
+     * 设置日志级别
+     *
+     * @param context_type 0代表2d,1代表3d
+     * */
+    setLogLevel: function (level){
+        GLog.d('bridge#setLogLevel(): native logLevel ' + level);
+        canvasModule.setLogLevel({level:level});
     }
 };
 

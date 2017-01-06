@@ -623,10 +623,10 @@ GContext2D.prototype.drawImage = function(image, // image
 sx, sy, sw, sh, // source (or destination if fewer args)
 dx, dy, dw, dh) { // destination
 
-    console.error("[GContext2D.drawImage] start...");
+    GLog.d("[GContext2D.drawImage] start...");
 
     this.render("auto");
-
+    
     GBridge.preLoadImage(image);
 
     var numArgs = arguments.length;
@@ -636,26 +636,26 @@ dx, dy, dw, dh) { // destination
             + sx + "," + sy + "," + sw + "," + sh + "," 
             + dx + "," + dy + "," + dw + "," + dh + ";");
 
-    this.render("auto");
-    return;
-    if (numArgs == 3) {
+    this.render();
 
-        // drawImage(image, dx,dy); position only (s becomes d)
-        this._drawCommands = this._drawCommands.concat("d" + image
-                + ",0,0," + image.width + "," + image.height + "," + sx + ","
-                + sy + "," + image.width + "," + image.height + ";");
+    // if (numArgs == 3) {
 
-    } else if (numArgs == 5) {
-        // drawImage(image, dx,dy,dw,dh); position and size (s becomes d)
-        this._drawCommands = this._drawCommands.concat("d" + image._id
-                + ",0,0," + image.width + "," + image.height + "," + sx + ","
-                + sy + "," + sw + "," + sh + ";");
-    } else if (numArgs == 9){
-        // [full]; all arguments, source and destination
-        this._drawCommands = this._drawCommands.concat("d" + image._id + ","
-                + sx + "," + sy + "," + sw + "," + sh + "," + dx + "," + dy
-                + "," + dw + "," + dh + ";");
-    }
+    //     // drawImage(image, dx,dy); position only (s becomes d)
+    //     this._drawCommands = this._drawCommands.concat("d" + image
+    //             + ",0,0," + image.width + "," + image.height + "," + sx + ","
+    //             + sy + "," + image.width + "," + image.height + ";");
+
+    // } else if (numArgs == 5) {
+    //     // drawImage(image, dx,dy,dw,dh); position and size (s becomes d)
+    //     this._drawCommands = this._drawCommands.concat("d" + image
+    //             + ",0,0," + image.width + "," + image.height + "," + sx + ","
+    //             + sy + "," + sw + "," + sh + ";");
+    // } else if (numArgs == 9){
+    //     // [full]; all arguments, source and destination
+    //     this._drawCommands = this._drawCommands.concat("d" + image + ","
+    //             + sx + "," + sy + "," + sw + "," + sh + "," + dx + "," + dy
+    //             + "," + dw + "," + dh + ";");
+    // }
 
     // console.log("image = "+image._src);
 };
@@ -687,8 +687,8 @@ GContext2D.prototype.render = function(flag) {
     }
     var commands = this._drawCommands;
     this._drawCommands = "";
-    GLog.d("GContext2D#render() called, commands is "+ commands);
     if (commands != null && commands != "") {
+        GLog.d("GContext2D#render() called, commands is "+ commands);
         GBridge.callRender(commands)
     }
 };

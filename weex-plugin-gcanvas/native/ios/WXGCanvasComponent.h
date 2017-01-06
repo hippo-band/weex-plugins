@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GCanvas/GCanvasPlugin.h>
 #import <WeexSDK/WXComponent.h>
+#import <GLKit/GLKit.h>
 
 @interface WXGCanvasComponent : WXComponent
 
-
-@property(nonatomic, strong) GCanvasPlugin* gcanvasPlugin;
 @property(nonatomic, strong) GLKView* glkview;
-
 @property(nonatomic, assign) CGRect componetFrame;
+    
 @end

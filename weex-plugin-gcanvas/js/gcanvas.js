@@ -147,6 +147,7 @@ var GCanvas = {
     },
 
     getContext: function (contextID) {
+        GLog.d('gcanvas#getContext=====>>>');
         if (_context){
             return _context;//unsupport change type after create
         }
@@ -173,6 +174,7 @@ var GCanvas = {
     },
 
     disable: function(){
+        GLog.d('gcanvas#disable=====>>>');
         GBridge.callDisable();
     }
 };

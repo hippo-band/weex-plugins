@@ -1,10 +1,10 @@
 {
-    "name": "weex-plugin--weex-plugin-amap",
+    "name": "weex-plugin-amap",
     "version": "1.0.0",
     "platform": [
-        "ios"
+        "web"
     ],
-    "main": "./js/index.we",
+    "main": "index.we",
     "description": "weex amap component",
     "keywords": [
         "weex",

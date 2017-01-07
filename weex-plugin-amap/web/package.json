@@ -2,13 +2,13 @@
     "name": "weex-plugin--weex-plugin-amap",
     "version": "1.0.0",
     "platform": [
-        "ios"
+        "web"
     ],
-    "main": "./js/index.we",
+    "main": "index.js",
     "description": "weex amap component",
     "keywords": [
         "weex",
-        "amap",
+        "amap"
         "mapview"
     ],
     "license": "Apache 2.0"

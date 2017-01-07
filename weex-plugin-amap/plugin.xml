@@ -81,6 +81,9 @@
          <source-file src="android/src/main/java/com/alibaba/weex/extend/WXMapViewComponent.java"
             target-dir="src/com/alibaba/weex/extend" />
 
+         <source-file src="android/src/main/java/com/alibaba/weex/extend/Constant.java"
+            target-dir="src/com/alibaba/weex/extend" />
+
          <framework src="com.amap.api:map3d-native:latest.integration" />
          <framework src="com.amap.api:map3d:latest.integration" />
          <framework src="com.amap.api:location:latest.integration" />

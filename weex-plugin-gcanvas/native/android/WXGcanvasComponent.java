@@ -21,8 +21,9 @@ import java.lang.reflect.InvocationTargetException;
 public class WXGcanvasComponent extends WXComponent<WXGCanvasGLSurfaceView> {
 
     public static class Creator implements ComponentCreator {
-        public WXComponent createInstance(WXSDKInstance instance, WXDomObject node, WXVContainer parent, boolean lazy) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-            return new WXGcanvasComponent(instance, node, parent, lazy);
+        @Override
+        public WXComponent createInstance(WXSDKInstance wxsdkInstance, WXDomObject wxDomObject, WXVContainer wxvContainer) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+            return new com.alibaba.weex.extend.component.WXGcanvasComponent(wxsdkInstance, wxDomObject, wxvContainer, false);
         }
     }
 

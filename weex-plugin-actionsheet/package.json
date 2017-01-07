@@ -1,9 +1,9 @@
 {
-  "name": "weex-plugin-actionsheet",
-  "version": "1.0.0",
+  "name": "weex-actionsheet",
+  "version": "1.0.5",
   "description": "weex actionsheet ",
   "cordova": {
-    "id": "weex-plugin-actionsheet",
+    "id": "weex-actionsheet",
     "platforms": [
       "android",
       "ios",
@@ -22,7 +22,7 @@
     "cordova-browser"
   ],
   "scripts": {
-    
+
   },
   "author": "weexteam",
   "license": "Apache-2.0",

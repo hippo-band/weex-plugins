@@ -79,9 +79,8 @@
          </config-file>
 
          <source-file src="android/src/main/java/com/alibaba/weex/extend/WXMapViewComponent.java"
-            target-dir="com/alibaba/weex/extend" />
+            target-dir="src/com/alibaba/weex/extend" />
 
-         <!--<framework src="com.taobao.android:gcanvas_weex_plugin:1.0.0-SNAPSHOT" />-->
          <framework src="com.amap.api:map3d-native:latest.integration" />
          <framework src="com.amap.api:map3d:latest.integration" />
          <framework src="com.amap.api:location:latest.integration" />

@@ -15,6 +15,16 @@ let params = {
 };
 
 let points = [];
+
+function addMarker(map) {
+  for(let i = 0; i < points.length; i ++){
+    let point = Array.from(points[i]);
+     let marker = new AMap.Marker({
+        position: point,
+        map: map,
+      });
+  }
+}
 // prototype methods.
 const proto = {
   create () {
@@ -35,30 +45,19 @@ const proto = {
   },
   ready () {
     let self = this;
-    console.log(self);
     let intval = window.setInterval(function() {
       if(window.AMap) {
-        console.log(params);
         self.map = new AMap.Map(self.mapwrap.id,params);
         AMap.plugin(['AMap.ToolBar','AMap.Geolocation'],() => {
           if(params.scale) {
             self.map.addControl(new AMap.ToolBar());  
           }
-          
           if(params.geolocation) {
             self.map.addControl(new AMap.Geolocation()); 
           }
           
         });
-        
-        for(let i = 0; i < points.length; i ++){
-          let point = Array.from(points[i]);
-           let marker = new AMap.Marker({
-              position: point,
-              map: self.map,
-            });
-          
-        }
+        addMarker(self.map);
         clearInterval(intval);
       }  
     },100);    
@@ -68,10 +67,15 @@ const proto = {
 
 
 
+
 const attr = {
   center (val) {
-    if(Array.isArray(val) && val.length==2)
-    params.center = val; 
+    if(Array.isArray(val) && val.length==2){
+      params.center = val;
+    }
+    if(window.AMap) {
+      this.map.setCenter(params.center);
+    }
   },
   zoom(val) {
     if(/^[0-9]$/.test(val)) {
@@ -79,8 +83,12 @@ const attr = {
     }
   },
   points(val) {
+    console.log(val);
     if(Array.isArray(val)) {
       points = val;   
+    }
+    if(window.AMap) {
+      addMarker(this.map);
     }
     
   },
@@ -97,9 +105,6 @@ const attr = {
 const style = {
   
 }
-
-
-
 
 // event config.
 const event = {

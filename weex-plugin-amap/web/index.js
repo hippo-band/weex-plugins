@@ -1,10 +1,20 @@
 'use strict'
 
 const defaultAttr = {
-  zoom: 11,
+  zoom: 13,
   resizeEnable: true,
 }
 
+let params = {
+  center: undefined,
+  zoom:11,
+  toolbar: true,
+  scale: false,
+  geolocation: false,
+  resizeEnable: true,
+};
+
+let points = [];
 // prototype methods.
 const proto = {
   create () {
@@ -28,13 +38,29 @@ const proto = {
     console.log(self);
     let intval = window.setInterval(function() {
       if(window.AMap) {
-        self.map = new AMap.Map(self.mapwrap.id, {
-          center:[117.000923,36.675807],
-          zoom:11
+        console.log(params);
+        self.map = new AMap.Map(self.mapwrap.id,params);
+        AMap.plugin(['AMap.ToolBar','AMap.Geolocation'],() => {
+          if(params.scale) {
+            self.map.addControl(new AMap.ToolBar());  
+          }
+          
+          if(params.geolocation) {
+            self.map.addControl(new AMap.Geolocation()); 
+          }
+          
         });
-        AMap.plugin(['AMap.ToolBar'],() => {
-          self.map.addControl(new AMap.ToolBar());
-        });
+        
+        for(let i = 0; i < points.length; i ++){
+          let point = Array.from(points[i]);
+           let marker = new AMap.Marker({
+              position: point,
+              map: self.map,
+            });
+          
+        }
+        
+        
         clearInterval(intval);
       }  
     },100);    
@@ -45,23 +71,37 @@ const proto = {
 
 
 const attr = {
-  value (val) {
-    this.value = val
-    this.inner.textContent = `Hello ${val}!`
+  center (val) {
+    if(Array.isArray(val) && val.length==2)
+    params.center = val; 
+  },
+  zoom(val) {
+    if(/^[0-9]$/.test(val)) {
+      params.zoom = val;   
+    }
+  },
+  points(val) {
+    if(Array.isArray(val)) {
+      points = val;   
+    }
+    
+  },
+  scale(val) {
+     params.scale = val; 
   },
   geolocation(val) {
-    let self = this;
-    if(val) {
-      console.log(val);
-      
-    }   
-  }
+     params.geolocation = val; 
+  },
+  
 }
 
 // style setters.
 const style = {
   
 }
+
+
+
 
 // event config.
 const event = {

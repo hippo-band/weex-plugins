@@ -4,11 +4,11 @@
     "platform": [
         "web"
     ],
-    "main": "index.js",
+    "main": "./index.js",
     "description": "weex amap component",
     "keywords": [
         "weex",
-        "amap"
+        "amap",
         "mapview"
     ],
     "license": "Apache 2.0"

@@ -59,8 +59,6 @@ const proto = {
             });
           
         }
-        
-        
         clearInterval(intval);
       }  
     },100);    

@@ -1,6 +1,10 @@
 <template>
   <div class="container">
       <weex-amap class="map" id="map2017" scale="true" geolocation="true" center={{pos}} points={{pointArr}} ></weex-amap>
+      
+      <div class="btn" onclick="changeCenter">set Center</div>
+      <div class="btn" onclick="changeCenter">set Center</div>
+     
   </div>
 </template>
 
@@ -15,14 +19,37 @@
     height: 600;
     background-color: #000;
   }
+  .btn{
+    margin: 10;
+    padding: 30 10;
+    background: #1ba1e2;
+    color: #fff; 
+  }
 </style>
 
 <script>
-
+  
   module.exports = {
     data: {
       pos:[116.487, 40.00003],
       pointArr: [[100,31],[101,31],[102,31]]
+    },
+    
+    methods() {
+      changeCenter() {
+        this.pos = [Math.random()*120,Math.random()*80];
+      },
+        
+      addPoints() {
+        this.pointsArr.push([Math.random()*120,Math.random()*80]);
+      },
+      
+      getLocation() {
+        
+      }
+      
+      
+      
     },
     
     created () {

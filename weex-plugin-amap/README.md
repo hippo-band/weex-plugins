@@ -1,5 +1,8 @@
 # weex-plugin-amap
 
+<img width="320" src="https://img.alicdn.com/tps/TB1m1l.PXXXXXczXFXXXXXXXXXX-800-600.png" />
+
+
 一款高德地图weex插件，支持定位，缩放等地图常用操作
 
 ### 快速开始

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <weex-amap class="map" id="map2017" scale="true" geolocation="true" zoom="5" center={{pos}} points={{pointArr}} ></weex-amap>
+    <weex-amap class="map" id="map2017" scale="true" geolocation="true" zoom="5" center={{pos}} points={{pointArr}} ></weex-amap>
       
     <div onclick="changeCenter"><text class="btn" >set Center</text></div>
     <div onclick="addPoints"><text class="btn">add points</text></div>
@@ -46,8 +46,9 @@
       },
         
       addPoints() {
-        this.pointArr[this.pointArr.length] = [80 + Math.random()*30,20 + Math.random()*20];
-        console.log(this.pointArr);
+        this.pointArr.push([80 + Math.random()*30,20 + Math.random()*20]);
+        this.pointArr = Array.from( this.pointArr);
+        
       },
       
       getLocation() {

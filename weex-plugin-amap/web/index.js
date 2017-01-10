@@ -21,7 +21,7 @@ function addMarker(map) {
   for(let i = 0; i < points.length; i ++){
     let point = Array.from(points[i]);
      let marker = new AMap.Marker({
-        position: point,
+        position: point.pos,
         map: map,
       });
   }

@@ -10,7 +10,10 @@
 ``` bash
 weexpack plugin add weex-plugin-amap
 ```
-
+你也可以使用本地插件添加，你可以clone 这个项目，然后存放到你本地目录添加
+``` bash
+weexpack plugin add ./weex-plugins/weex-plugin-amap
+```
 编辑你的weex文件
 
 ``` we
@@ -59,17 +62,6 @@ weexpack plugin add weex-plugin-amap
 | geolocation | boolean     |    false | 是否显示自动定位面板 |
 | scale | boolean   |   false | 是否显示缩放工具 |
 | points | Array   | [[100,31],[101,31],[102,31]] | 在地图上标记坐标点 |
-
-
-### 方法
-
-+ setCenter(x,y) 指定地图的中心点 
-
-+ setZoomEnable() 设置用户是否缩放 true/false
-
-+ getGeolocation 获取用户定位信息 return Object
-
-+ addMarker 用户自行标记
 
 
 

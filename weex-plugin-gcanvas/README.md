@@ -1,4 +1,4 @@
-# weex-plugin-gcanvas
+# weex-gcanvas
 
 
 
@@ -7,7 +7,7 @@
 ### 快速开始
 
 ``` bash
-weexpack plugin add weex-plugin-gcanvas
+weexpack plugin add weex-gcanvas
 ```
 你也可以使用本地插件添加，你可以clone 这个项目，然后存放到你本地目录添加
 ``` bash

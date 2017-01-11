@@ -24,7 +24,7 @@
   - `result {string}`：结果三种类型 `success`, `cancel`, `error`
   - `data {Object}`：选择的结果。
      - `index {number}`：选中的项
-     - `message`：选中的内容 
+     - `message`：选中的内容
 
 #### 示例
 
@@ -101,3 +101,6 @@
 ```
 
 [Have a try](http://dotwe.org/c3856e6035fce2f8511a021a5360d3da)
+
+#### demo
+![action demo](https://github.com/weexteam/weex-plugins/blob/master/weex-plugin-actionsheet/doc/1.gif?raw=true)

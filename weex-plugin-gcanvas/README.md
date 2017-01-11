@@ -116,7 +116,8 @@ weexpack plugin add ./weex-plugins/weex-plugin-gcanvas
 | 其他 | 方法   | putImageData() | 覆盖 |
 
 
+
 # 其它
 [weex-chart](https://github.com/weexteam/weex-plugins/tree/master/weex-plugin-chart)项目使用了weex-plugin-gcanvas插件提供了绘制canvas图表的功能。
-可以安装weex-chart插件后，运行其中自带的[examples目录](https://github.com/weexteam/weex-plugins/tree/master/weex-plugin-chart/examples), 查看各种图标以检验weex-plugin-gcanvas的canvas支持能力。
+可以安装weex-chart插件后，运行其中自带的[examples目录](https://github.com/weexteam/weex-plugins/tree/master/weex-plugin-chart/examples), 查看各种图表以检验weex-plugin-gcanvas的canvas支持能力。
 

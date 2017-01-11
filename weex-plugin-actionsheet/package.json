@@ -1,31 +1,13 @@
 {
-  "name": "weex-actionsheet",
-  "version": "1.0.5",
-  "description": "weex actionsheet ",
-  "cordova": {
-    "id": "weex-actionsheet",
-    "platforms": [
-      "android",
-      "ios",
-      "browser"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/weexteam/weex-plugins"
-  },
-  "keywords": [
-    "weex",
-    "actionsheet",
-    "weex-android",
-    "weex-ios",
-    "cordova-browser"
-  ],
-  "scripts": {
-
-  },
-  "author": "weexteam",
-  "license": "Apache-2.0",
-  "devDependencies": {
-  }
+    "version": "1.0.10",
+    "platform": [
+        "ios"
+    ],
+    "description": "weex actionsheet",
+    "keywords": [
+        "weex",
+        "actionsheet"
+    ],
+    "license": "Apache 2.0",
+    "name": "weex-plugin-weex-actionsheet"
 }

@@ -54,16 +54,29 @@ weexpack plugin add ./weex-plugins/weex-plugin-amap
 </script>
 
 ```
-### 属性
+### API
 
+#### weex-amap 属性
 
 | 属性        | 类型         | Demo  | 描述  |
 | ------------- |:-------------:| -----:|----------:|
 | center     | array | [116.487, 40.00003] | 传入地理位置坐标[x,y] 默认为当前定位位置 |
 | zoom      | number      |  11 | 缩放级别 |
-| geolocation | boolean     |    false | 是否显示自动定位面板 |
-| scale | boolean   |   false | 是否显示缩放工具 |
-| points | Array   | [[100,31],[101,31],[102,31]] | 在地图上标记坐标点 |
+| zoomEnable | boolean     |    false | 是否允许缩放 |
+| doubleClickZoom | boolean   |   false | 是否双击放大 |
+
+
+#### weex-amap-marker
+
+| 属性        | 类型         | Demo  | 描述  |
+| ------------- |:-------------:| -----:|----------:|
+| position     | array | [116.487, 40.00003] | 传入地理位置坐标[x,y] 默认为当前定位位置 |
+| offset      | array      |  [1,2] | 位置偏移 |
+| icon | string     |    some_icon_url | 是否允许缩放 |
+| content | string   |   'this is a marker' | 坐标点点击文本 |
+
+
+
 
 
 

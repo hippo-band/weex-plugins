@@ -36,7 +36,7 @@
              <feature name="WXMapViewComponent">
                  <param name="category" value="component" />
                  <param name="ios-package" value="WXMapViewComponent" />
-                 <param name="api" value="mapview" />
+                 <param name="api" value="weex-amap" />
              </feature>
          </config-file>
          
